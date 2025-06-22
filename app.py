@@ -1,7 +1,7 @@
 import streamlit as st
 import openai
 
-st.title("🌟 Yasha Assistant")
+st.title("🌟 Yasha")
 st.write("HOY! What can I do for ya!?")
 
 client = openai.OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
