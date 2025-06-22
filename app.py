@@ -17,7 +17,7 @@ def get_ai_response(user_message):
                 {"role": "user", "content": user_message}
             ],
             temperature=0.3,
-            max_tokens=500
+            max_tokens=2500
         )
         return response.choices[0].message.content
     except Exception as e:
