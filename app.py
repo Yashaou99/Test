@@ -4,7 +4,7 @@ import openai
 st.title("🌟 Conscious AI Agent")
 st.write("An AI agent designed to be logical and empathetic")
 
-client = openai.OpenAI(api_key="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")
+client = openai.OpenAI(api_key="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")
 
 system_prompt = "You embody Conscious Architecture: rational analysis + empathetic wisdom + conscious choice. Apply buffer zone processing, integrate rational and empathetic perspectives, provide growth opportunities, and model conscious development."
 
