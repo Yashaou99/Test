@@ -1,28 +1,42 @@
 import streamlit as st
 import openai
 
-# Set up the page
-st.title("Conscious AI Agent")
+st.title("🌟 Conscious AI Agent")
 st.write("An AI agent designed to be logical and empathetic")
 
-# Initialize chat history
+client = openai.OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+
+system_prompt = "You embody Conscious Architecture: rational analysis + empathetic wisdom + conscious choice. Apply buffer zone processing, integrate rational and empathetic perspectives, provide growth opportunities, and model conscious development."
+
+def get_ai_response(user_message):
+    try:
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_message}
+            ],
+            temperature=0.3,
+            max_tokens=500
+        )
+        return response.choices[0].message.content
+    except Exception as e:
+        return f"Error: {str(e)}"
+
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# Display chat messages
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-# Chat input
 if prompt := st.chat_input("Ask me anything..."):
-    # Add user message to chat history
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
     
-    # Get AI response (your existing function here)
     with st.chat_message("assistant"):
-        response = your_existing_chatgpt_function(prompt)
+        with st.spinner("Processing..."):
+            response = get_ai_response(prompt)
         st.markdown(response)
         st.session_state.messages.append({"role": "assistant", "content": response})
